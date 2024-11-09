@@ -1,0 +1,105 @@
+.chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    font-family: Arial, sans-serif;
+}
+
+.chatbox__support {
+    display: none;
+    flex-direction: column;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chatbox__header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.chatbox__messages {
+    padding: 10px;
+    height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.messages__item {
+    padding: 8px;
+    border-radius: 5px;
+    max-width: 70%;
+}
+
+.messages__item--visitor {
+    background-color: #e0e0e0;
+    align-self: flex-start;
+}
+
+.messages__item--operator {
+    background-color: #4CAF50;
+    color: white;
+    align-self: flex-end;
+}
+
+.messages__item--typing {
+    display: flex;
+    gap: 2px;
+    align-self: flex-start;
+}
+
+.messages__dot {
+    width: 6px;
+    height: 6px;
+    background-color: #333;
+    border-radius: 50%;
+    animation: blink 1s infinite;
+}
+
+.chatbox__footer {
+    display: flex;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.chatbox__footer input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.chatbox__button {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.chatbox__button button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Animação de digitação */
+@keyframes blink {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+}

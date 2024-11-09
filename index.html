@@ -8,6 +8,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/csschatbox/typing.css">
+    <link rel="stylesheet" href="/csschatbox/chat.css">
     <title>Samu FSA</title>
   </head>
   <body>
@@ -87,6 +89,38 @@
           </form>
         </div>
       </div>
+
+      
+<div class="chatbox">
+  <div class="chatbox__support">
+      <div class="chatbox__header">Suporte Atendimento 24h!</div>
+      <div class="chatbox__messages">
+          <div>
+              <div class="messages__item messages__item--visitor">Ola aqui quem fala e Ana sua atendente, Como posso lhe ajudar hoje?</div>
+              <div class="messages__item messages__item--operator"></div>
+              <div class="messages__item messages__item--typing">
+                  <span class="messages__dot"></span>
+                  <span class="messages__dot"></span>
+                  <span class="messages__dot"></span>
+              </div>
+          </div>
+      </div>
+      <div class="chatbox__footer">
+          <input type="text" placeholder="Escreva sua mensagem">
+      </div>
+  </div>
+  <div class="chatbox__button">
+      <button onclick="toggleChat()">Suporte 24h</button>
+  </div>
+</div>
+
+<script>
+  function toggleChat() {
+      const chatboxSupport = document.querySelector('.chatbox__support');
+      chatboxSupport.style.display = chatboxSupport.style.display === 'none' || chatboxSupport.style.display === '' ? 'flex' : 'none';
+  }
+</script>
+
     </header>
 
     <section class="section__container service__container" id="service">
@@ -189,7 +223,7 @@
     <footer class="footer">
       <div class="section__container footer__container">
         <div class="footer__col">
-          <h3>Health<span>Care</span></h3>
+          <img src="/assets/samu.png" alt="" class="logosamu">
           <p>
             Estamos honrados em fazer parte de sua jornada de saúde e comprometidos
             para fornecer cuidados compassivos, personalizados e de alto nível a cada
@@ -199,14 +233,6 @@
             Confie-nos com sua saúde e deixe-nos trabalhar juntos para alcançar o
             melhores resultados possíveis para você e seus entes queridos.
           </p>
-        </div>
-        <div class="footer__col">
-          <h4>About Us</h4>
-          <p>Home</p>
-          <p>About Us</p>
-          <p>Work With Us</p>
-          <p>Our Blog</p>
-          <p>Terms & Conditions</p>
         </div>
         <div class="footer__col">
           <h4>Serviços</h4>
