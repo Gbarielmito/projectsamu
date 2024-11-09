@@ -98,62 +98,7 @@
           </script>
         </div>
   
-        <script>
-          function openPopup() {
-            document.getElementById("popupForm").style.display = "block";
-            document.getElementById("overlay").style.display = "block";
-          }
-  
-          function closePopup() {
-            document.getElementById("popupForm").style.display = "none";
-            document.getElementById("overlay").style.display = "none";
-          }
-  
-          function validaCPF(cpf) {
-            cpf = cpf.replace(/[^\d]+/g, '');
-  
-            if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-  
-            let soma = 0;
-            for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
-            let resto = (soma * 10) % 11;
-            if (resto === 10 || resto === 11) resto = 0;
-            if (resto !== parseInt(cpf.charAt(9))) return false;
-  
-            soma = 0;
-            for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
-            resto = (soma * 10) % 11;
-            if (resto === 10 || resto === 11) resto = 0;
-            return resto === parseInt(cpf.charAt(10));
-          }
-  
-          function verificarFormulario(event) {
-            event.preventDefault();  // Impede o envio do formulário e o recarregamento da página
-            
-            const cpf = document.getElementById('cpf').value;
-            const fullName = document.getElementById('fullName').value;
-            const age = document.getElementById('age').value;
-            const phone = document.getElementById('phone').value;
-  
-            // Verifica se todos os campos estão preenchidos
-            if (!cpf || !fullName || !age || !phone) {
-              alert('Por favor, preencha todos os campos necessários.');
-              return;
-            }
-  
-            // Valida o CPF
-            if (!validaCPF(cpf)) {
-              alert('CPF inválido!');
-              return;
-            }
-  
-            // Exibe mensagem de sucesso
-            document.getElementById('verificationResult').innerText = 'Verificação concluída com sucesso!';
-            alert('Verificação concluída com sucesso');
-          }
-  
-          document.getElementById('verificationForm').addEventListener('submit', verificarFormulario);
-        </script>
+        
       </nav>
       
       <div class="section__container header__container" id="home">
@@ -169,10 +114,6 @@
             <input type="text" id="age" placeholder="Idade" />
             <input type="text" id="phone" placeholder="Telefone" />
             <button type="submit" class="btn form__btn">Concluir Verificação</button>
-
-            <script>
-              alert ('Verificação concluida com sucesso');
-            </script>
           </form>
           <div id="verificationResult"></div>
         </div>
@@ -182,7 +123,7 @@
       
   <div class="chatbox">
     <div class="chatbox__support">
-        <div class="chatbox__header">Suporte Atendimento 24h!</div>
+        <div class="chatbox__header">Solicitações de emergencia</div>
         <div class="chatbox__messages">
             <div>
                 <div class="messages__item messages__item--visitor">Solicitações feitas:</div>
@@ -195,11 +136,11 @@
             </div>
         </div>
         <div class="chatbox__footer">
-            <input type="text" placeholder="Escreva sua mensagem">
+          <button class="btnsoli" onclick="openPopup()">Cancelar emergência</button>
         </div>
     </div>
     <div class="chatbox__button">
-        <button onclick="toggleChat()">Suporte 24h</button>
+        <button onclick="toggleChat()">Caixa De Mensagens</button>
     </div>
   </div>
   
