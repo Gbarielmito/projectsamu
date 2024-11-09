@@ -69,6 +69,15 @@
   box-sizing: border-box;
 }
 
+.popup input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 .popup button {
   padding: 10px 20px;
   background-color: rgba(18, 172, 142, 0.9);

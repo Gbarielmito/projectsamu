@@ -17,109 +17,199 @@
       <nav class="section__container nav__container">
         <img src="/assets/samu.png" alt="" class="logosamu">
         <ul class="nav__links">
-         <li class="link"><a href="#home">Inicio</a></li>
+          <li class="link"><a href="#home">Inicio</a></li>
           <li class="link"><a href="#about">Quem somos</a></li>
           <li class="link"><a href="#service">Serviços</a></li>
         </ul>
         <button class="btn" onclick="openPopup()">Emergência</button>
-
+  
         <div class="overlay" onclick="closePopup()" id="overlay"></div>
-
         <div class="popup" id="popupForm">
           <h3>Informações de Emergência</h3>
           <label for="nome">Nome Completo do Paciente:</label>
           <input type="text" id="nome" name="nome" placeholder="Digite o nome completo">
-      
+        
           <label for="ocorrencia">Ocorrência do Chamado:</label>
           <input type="text" id="ocorrencia" name="ocorrencia" placeholder="Descreva a ocorrência">
-      
+        
           <label for="local">Local do Acontecido:</label>
           <input type="text" id="local" name="local" placeholder="Digite o local">
-      
-          <button onclick="submitForm()">Abrir Chamado</button>
-        </div>
 
-        <script>
-          
-          function openPopup() {
-              document.getElementById("popupForm").style.display = "block";
-              document.getElementById("overlay").style.display = "block";
-          }
-      
-          
-          function closePopup() {
-              document.getElementById("popupForm").style.display = "none";
-              document.getElementById("overlay").style.display = "none";
-          }
-      
-          
-          function submitForm() {
-              const nome = document.getElementById("nome").value;
-              const ocorrencia = document.getElementById("ocorrencia").value;
-              const local = document.getElementById("local").value;
-      
-              
-              console.log("Nome:", nome);
-              console.log("Ocorrência:", ocorrencia);
-              console.log("Local:", local);
-      
-              
+          <label for="photo">Enviar Foto:</label>
+          <input type="file" id="photo" name="photo" accept="image/*">
+        
+          <label for="video">Enviar Vídeo:</label>
+          <input type="file" id="video" name="video" accept="video/*">
+        
+         <a href="tel:192"><button onclick="submitPopupForm()">Abrir Chamado</button></a>
+  
+          <script>
+            function getLocation() {
+              if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                  function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+  
+                    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+                      .then(response => response.json())
+                      .then(data => {
+                        const location = data.display_name || 'Localização desconhecida';
+                        document.getElementById('local').value = location; 
+                      })
+                      .catch(error => {
+                        console.error('Erro ao obter o local:', error);
+                        document.getElementById('local').value = 'Erro ao obter localização';
+                      });
+                  },
+                  function(error) {
+                    console.error('Erro ao obter geolocalização:', error);
+                    document.getElementById('local').value = 'Localização não disponível';
+                  }
+                );
+              } else {
+                alert('A geolocalização não é suportada neste navegador.');
+              }
+            }
+  
+            function submitPopupForm() {
+              const nome = document.getElementById('nome').value;
+              const ocorrencia = document.getElementById('ocorrencia').value;
+              const local = document.getElementById('local').value;
+  
+              if (!nome || !ocorrencia || !local) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+              }
+  
+              console.log({
+                nome: nome,
+                ocorrencia: ocorrencia,
+                local: local
+              });
+  
+              alert('Chamado aberto com sucesso!');
               closePopup();
+            }
+  
+            window.onload = function() {
+              getLocation();
+            };
+          </script>
+        </div>
+  
+        <script>
+          function openPopup() {
+            document.getElementById("popupForm").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
           }
-      </script>
+  
+          function closePopup() {
+            document.getElementById("popupForm").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+          }
+  
+          function validaCPF(cpf) {
+            cpf = cpf.replace(/[^\d]+/g, '');
+  
+            if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+  
+            let soma = 0;
+            for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+            let resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) resto = 0;
+            if (resto !== parseInt(cpf.charAt(9))) return false;
+  
+            soma = 0;
+            for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+            resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) resto = 0;
+            return resto === parseInt(cpf.charAt(10));
+          }
+  
+          function verificarFormulario(event) {
+            event.preventDefault();  // Impede o envio do formulário e o recarregamento da página
+            
+            const cpf = document.getElementById('cpf').value;
+            const fullName = document.getElementById('fullName').value;
+            const age = document.getElementById('age').value;
+            const phone = document.getElementById('phone').value;
+  
+            // Verifica se todos os campos estão preenchidos
+            if (!cpf || !fullName || !age || !phone) {
+              alert('Por favor, preencha todos os campos necessários.');
+              return;
+            }
+  
+            // Valida o CPF
+            if (!validaCPF(cpf)) {
+              alert('CPF inválido!');
+              return;
+            }
+  
+            // Exibe mensagem de sucesso
+            document.getElementById('verificationResult').innerText = 'Verificação concluída com sucesso!';
+            alert('Verificação concluída com sucesso');
+          }
+  
+          document.getElementById('verificationForm').addEventListener('submit', verificarFormulario);
+        </script>
       </nav>
+      
       <div class="section__container header__container" id="home">
         <div class="header__content">
           <h1>Faça sua verificação para entrar em contato com a samu</h1>
-          <p>
-            Bem-vindo, onde experiências excepcionais do paciente são nossa prioridade.
-            Com cuidado compassivo, instalações de última geração e um
-            abordagem centrada no paciente, nos dedicamos ao seu atendimento rapido. Confiar
-            nós com sua saúde e experimente a diferença.
-          </p>
+          <p>Bem-vindo, onde experiências excepcionais do paciente são nossa prioridade.</p>
         </div>
         <div class="header__form">
-          <form>
+          <form id="verificationForm">
             <h4>Verificação de identidade</h4>
-            <input type="text" placeholder="Numero do CPF" />
-            <input type="text" placeholder="Nome Completo" />
-            <input type="text" placeholder="Idade" />
-            <input type="text" placeholder="Telefone" />
-            <button class="btn form__btn">Concluir Verificação</button>
+            <input type="text" id="cpf" placeholder="Número do CPF" />
+            <input type="text" id="fullName" placeholder="Nome Completo" />
+            <input type="text" id="age" placeholder="Idade" />
+            <input type="text" id="phone" placeholder="Telefone" />
+            <button type="submit" class="btn form__btn">Concluir Verificação</button>
+
+            <script>
+              alert ('Verificação concluida com sucesso');
+            </script>
           </form>
+          <div id="verificationResult"></div>
         </div>
       </div>
-
+    </header>
+  </body>
       
-<div class="chatbox">
-  <div class="chatbox__support">
-      <div class="chatbox__header">Suporte Atendimento 24h!</div>
-      <div class="chatbox__messages">
-          <div>
-              <div class="messages__item messages__item--visitor">Ola aqui quem fala e Ana sua atendente, Como posso lhe ajudar hoje?</div>
-              <div class="messages__item messages__item--operator"></div>
-              <div class="messages__item messages__item--typing">
-                  <span class="messages__dot"></span>
-                  <span class="messages__dot"></span>
-                  <span class="messages__dot"></span>
-              </div>
-          </div>
-      </div>
-      <div class="chatbox__footer">
-          <input type="text" placeholder="Escreva sua mensagem">
-      </div>
+  <div class="chatbox">
+    <div class="chatbox__support">
+        <div class="chatbox__header">Suporte Atendimento 24h!</div>
+        <div class="chatbox__messages">
+            <div>
+                <div class="messages__item messages__item--visitor">Solicitações feitas:</div>
+                <div class="messages__item messages__item--operator"></div>
+                <div class="messages__item messages__item--typing">
+                    <span class="messages__dot"></span>
+                    <span class="messages__dot"></span>
+                    <span class="messages__dot"></span>
+                </div>
+            </div>
+        </div>
+        <div class="chatbox__footer">
+            <input type="text" placeholder="Escreva sua mensagem">
+        </div>
+    </div>
+    <div class="chatbox__button">
+        <button onclick="toggleChat()">Suporte 24h</button>
+    </div>
   </div>
-  <div class="chatbox__button">
-      <button onclick="toggleChat()">Suporte 24h</button>
-  </div>
-</div>
+  
 
-<script>
-  function toggleChat() {
-      const chatboxSupport = document.querySelector('.chatbox__support');
-      chatboxSupport.style.display = chatboxSupport.style.display === 'none' || chatboxSupport.style.display === '' ? 'flex' : 'none';
-  }
-</script>
+  <script>
+    function toggleChat() {
+        const chatboxSupport = document.querySelector('.chatbox__support');
+        chatboxSupport.style.display = chatboxSupport.style.display === 'none' || chatboxSupport.style.display === '' ? 'flex' : 'none';
+    }
+  </script>
 
     </header>
 
@@ -166,6 +256,15 @@
           <p>
             Deite a pessoa de lado em uma superfície segura e retire objetos ao redor. Não tente conter os movimentos nem coloque nada na boca da pessoa.
           </p>
+          <a href="#">Ler Mais</a>
+        </div>
+        <div class="service__card">
+          <span><i class="ri-psychotherapy-line"></i></span>
+          <h4>Desmaio</h4>
+          <p>Deite a Pessoa: Coloque-a deitada de costas e eleve as pernas.</p>
+          <p>Afrouxe Roupa Apertada: Isso ajuda a melhorar a circulação.</p>
+          <p>Recuperação: Quando ela acordar, deixe-a sentada devagar, evitando que se levante rapidamente.</p>
+          
           <a href="#">Ler Mais</a>
         </div>
       </div>
