@@ -19,7 +19,52 @@
           <li class="link"><a href="#about">Quem somos</a></li>
           <li class="link"><a href="#service">Serviços</a></li>
         </ul>
-        <button class="btn">Emergência</button>
+        <button class="btn" onclick="openPopup()">Emergência</button>
+
+        <div class="overlay" onclick="closePopup()" id="overlay"></div>
+
+        <div class="popup" id="popupForm">
+          <h3>Informações de Emergência</h3>
+          <label for="nome">Nome Completo do Paciente:</label>
+          <input type="text" id="nome" name="nome" placeholder="Digite o nome completo">
+      
+          <label for="ocorrencia">Ocorrência do Chamado:</label>
+          <input type="text" id="ocorrencia" name="ocorrencia" placeholder="Descreva a ocorrência">
+      
+          <label for="local">Local do Acontecido:</label>
+          <input type="text" id="local" name="local" placeholder="Digite o local">
+      
+          <button onclick="submitForm()">Abrir Chamado</button>
+        </div>
+
+        <script>
+          
+          function openPopup() {
+              document.getElementById("popupForm").style.display = "block";
+              document.getElementById("overlay").style.display = "block";
+          }
+      
+          
+          function closePopup() {
+              document.getElementById("popupForm").style.display = "none";
+              document.getElementById("overlay").style.display = "none";
+          }
+      
+          
+          function submitForm() {
+              const nome = document.getElementById("nome").value;
+              const ocorrencia = document.getElementById("ocorrencia").value;
+              const local = document.getElementById("local").value;
+      
+              
+              console.log("Nome:", nome);
+              console.log("Ocorrência:", ocorrencia);
+              console.log("Local:", local);
+      
+              
+              closePopup();
+          }
+      </script>
       </nav>
       <div class="section__container header__container" id="home">
         <div class="header__content">
