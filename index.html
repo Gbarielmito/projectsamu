@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="/csschatbox/typing.css">
     <link rel="stylesheet" href="/csschatbox/chat.css">
-    <title>Samu FSA</title>
+    <link rel="stylesheet" href="/popveri.css">
+    <title>Samu Conect</title>
   </head>
   <body>
     <header>
@@ -24,7 +25,7 @@
           <button class="btn" onclick="openPopup()">Emergência</button>
   
           <div class="overlay" onclick="closePopup()" id="overlay"></div>
-          <div class="popup" id="popupForm">
+            <div class="popup" id="popupForm">
               <h3>Informações de Emergência</h3>
               <label for="nome">Nome Completo do Paciente:</label>
               <input type="text" id="nome" name="nome" placeholder="Digite o nome completo">
@@ -35,13 +36,36 @@
               <label for="local">Local do Acontecido:</label>
               <input type="text" id="local" name="local" placeholder="Digite o local" readonly>
             
-              <label for="photo">Enviar Foto:</label>
+              <label for="photo">Enviar Arquivo de Midia:</label>
               <input type="file" id="photo" name="photo" accept="image/*">
             
-              <label for="video">Enviar Vídeo:</label>
-              <input type="file" id="video" name="video" accept="video/*">
-            
-              <button onclick="submitPopupForm()">Abrir Chamado</button>
+             <a href="tel:192"><button onclick="openVerificationPopup()">Concluir chamado de emergência</button></a>
+            </div>
+
+            <script>
+               function openPopup() {
+                document.getElementById("popupForm").style.display = "block";
+                document.getElementById("overlay").style.display = "block";
+            }
+
+            // Função para fechar o pop-up de Emergência
+            function closePopup() {
+                document.getElementById("popupForm").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+            }
+
+            // Função para abrir o pop-up de Concluir Verificação
+            function openVerificationPopup() {
+                document.getElementById("verificationPopup").style.display = "block";
+                document.getElementById("overlayVerification").style.display = "block";
+            }
+
+            // Função para fechar o pop-up de Concluir Verificação
+            function closeVerificationPopup() {
+                document.getElementById("verificationPopup").style.display = "none";
+                document.getElementById("overlayVerification").style.display = "none";
+            }
+            </script>
           </div>
           
           <script>
@@ -116,8 +140,7 @@
               getLocation();
             };
         </script>
-        
-  
+          
         <script>
           function openPopup() {
             document.getElementById("popupForm").style.display = "block";
@@ -188,6 +211,16 @@
             <input type="text" id="phone" placeholder="Telefone" />
             <button type="submit" class="btn form__btn">Concluir Verificação</button>
             
+            <!-- Pop-up de Concluir Verificação -->
+            <div id="verificationPopup" class="popup-overlay">
+              <div class="popup-content">
+                <h3>Chamado de emergência enviado com sucesso</h3>
+                <p>Confirme que você concluiu a verificação dos dados.</p>
+                
+                <button onclick="submitFeedback()">Enviar Feedback</button>
+                <button onclick="closeVerificationPopup()">Fechar</button>
+              </div>
+            </div>
           </form>
           <div id="verificationResult"></div>
         </div>
@@ -209,6 +242,53 @@
         <button onclick="toggleChat()">Caixa De Mensagens</button>
     </div>
 </div>
+
+<script>
+  function submitEmergency() {
+    const nome = document.getElementById('nome').value;
+    const ocorrencia = document.getElementById('ocorrencia').value;
+    const local = document.getElementById('local').value;
+  
+    if (!nome || !ocorrencia || !local) {
+      alert('Por favor, preencha todos os campos.');
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('ocorrencia', ocorrencia);
+    formData.append('local', local);
+  
+    fetch('salvar_emergencia.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+      alert(data);
+      closePopup();
+      carregarSolicitacoesEmergencia(); // Atualiza a caixa de mensagens
+    })
+    .catch(error => console.error('Erro ao salvar a emergência:', error));
+  }
+  
+  function carregarSolicitacoesEmergencia() {
+    fetch('get_emergencias.php')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('emergencyRequests').innerHTML = data;
+      })
+      .catch(error => console.error('Erro ao carregar as solicitações de emergência:', error));
+  }
+  
+  function toggleChat() {
+    const chatboxSupport = document.querySelector('.chatbox__support');
+    chatboxSupport.style.display = chatboxSupport.style.display === 'none' ? 'flex' : 'none';
+    if (chatboxSupport.style.display === 'flex') {
+      carregarSolicitacoesEmergencia();
+    }
+  }
+  </script>
 
 <script>
     function toggleChat() {

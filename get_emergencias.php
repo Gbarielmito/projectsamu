@@ -1,32 +1,59 @@
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "emergencia_samu";
+// database.php
+try {
+    $db = new PDO('sqlite:emergencias.db');
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
+    // Criação da tabela de emergências, se não existir
+    $db->exec("CREATE TABLE IF NOT EXISTS emergencias (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT,
+        ocorrencia TEXT,
+        local TEXT,
+        data_hora TEXT
+    )");
+} catch (PDOException $e) {
+    echo "Erro ao conectar ao banco de dados: " . $e->getMessage();
 }
+?>
 
-$sql = "SELECT nome_paciente, ocorrencia, locall, data_chamado FROM chamados ORDER BY data_chamado DESC LIMIT 5";
-$result = $conn->query($sql);
+<?php
+include 'database.php';
 
-$emergencias = "";
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $emergencias .= "<div class='messages__item messages__item--operator'>
-                            <strong>Nome:</strong> " . $row['nome_paciente'] . "<br>
-                            <strong>Ocorrência:</strong> " . $row['ocorrencia'] . "<br>
-                            <strong>Local:</strong> " . $row['locall'] . "<br>
-                            <strong>Data:</strong> " . $row['data_chamado'] . "
-                         </div>";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nome = $_POST['nome'];
+    $ocorrencia = $_POST['ocorrencia'];
+    $local = $_POST['local'];
+    $dataHora = date('Y-m-d H:i:s');
+
+    // Insere a emergência no banco de dados
+    $stmt = $db->prepare("INSERT INTO emergencias (nome, ocorrencia, local, data_hora) VALUES (:nome, :ocorrencia, :local, :data_hora)");
+    $stmt->bindParam(':nome', $nome);
+    $stmt->bindParam(':ocorrencia', $ocorrencia);
+    $stmt->bindParam(':local', $local);
+    $stmt->bindParam(':data_hora', $dataHora);
+
+    if ($stmt->execute()) {
+        echo "Emergência salva com sucesso!";
+    } else {
+        echo "Erro ao salvar a emergência.";
     }
-} else {
-    $emergencias = "<div class='messages__item messages__item--operator'>Nenhuma solicitação encontrada.</div>";
 }
+?>
 
-$conn->close();
-echo $emergencias;
+<?php
+include 'database.php';
+
+// Consulta as emergências no banco de dados
+$stmt = $db->query("SELECT * FROM emergencias ORDER BY data_hora DESC");
+$emergencias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($emergencias as $emergencia) {
+    echo "<div class='emergency-item'>";
+    echo "<strong>Nome:</strong> " . htmlspecialchars($emergencia['nome']) . "<br>";
+    echo "<strong>Ocorrência:</strong> " . htmlspecialchars($emergencia['ocorrencia']) . "<br>";
+    echo "<strong>Local:</strong> " . htmlspecialchars($emergencia['local']) . "<br>";
+    echo "<strong>Data e Hora:</strong> " . htmlspecialchars($emergencia['data_hora']) . "<br>";
+    echo "</div><hr>";
+}
 ?>
