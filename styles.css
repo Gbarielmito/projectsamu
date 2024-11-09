@@ -23,6 +23,10 @@
   padding: 5rem 1rem;
 }
 
+.section__container .logosamu{
+  width: 110px;
+}
+
 .section__header {
   margin-bottom: 0.5rem;
   font-size: 2rem;
@@ -66,7 +70,7 @@ header {
       rgba(18, 172, 142, 0.9),
       rgba(18, 172, 142, 0.7)
     ),
-    url("assets/header.jpg");
+    url("assets/fundodesamu.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -263,7 +267,7 @@ header {
 }
 
 .about__image img {
-  max-width: 400px;
+  max-width: 550px;
   margin: auto;
   border-radius: 10px;
 }
@@ -276,7 +280,7 @@ header {
 }
 
 .why__image img {
-  max-width: 400px;
+  max-width: 700px;
   margin: auto;
   border-radius: 10px;
 }

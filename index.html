@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,40 +8,37 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <title>Web Design Mastery | HealthCare</title>
+    <title>Samu FSA</title>
   </head>
   <body>
     <header>
       <nav class="section__container nav__container">
-        <div class="nav__logo">Health<span>Care</span></div>
+        <img src="/assets/samu.png" alt="" class="logosamu">
         <ul class="nav__links">
-         <li class="link"><a href="#home">Home</a></li>
-          <li class="link"><a href="#about">About Us</a></li>
-          <li class="link"><a href="#service">Services</a></li>
-          <li class="link"><a href="#pages">Pages</a></li>
-          <li class="link"><a href="#blog">Blog</a></li>
+         <li class="link"><a href="#home">Inicio</a></li>
+          <li class="link"><a href="#about">Quem somos</a></li>
+          <li class="link"><a href="#service">Serviços</a></li>
         </ul>
-        <button class="btn">Contact Us</button>
+        <button class="btn">Emergência</button>
       </nav>
       <div class="section__container header__container" id="home">
         <div class="header__content">
-          <h1>Providing an Exceptional Patient Experience</h1>
+          <h1>Faça sua verificação para entrar em contato com a samu</h1>
           <p>
-            Welcome, where exceptional patient experiences are our priority.
-            With compassionate care, state-of-the-art facilities, and a
-            patient-centered approach, we're dedicated to your well-being. Trust
-            us with your health and experience the difference.
+            Bem-vindo, onde experiências excepcionais do paciente são nossa prioridade.
+            Com cuidado compassivo, instalações de última geração e um
+            abordagem centrada no paciente, nos dedicamos ao seu atendimento rapido. Confiar
+            nós com sua saúde e experimente a diferença.
           </p>
-          <button class="btn">See Services</button>
         </div>
         <div class="header__form">
           <form>
-            <h4>Book Now</h4>
-            <input type="text" placeholder="First Name" />
-            <input type="text" placeholder="Last Name" />
-            <input type="text" placeholder="Address" />
-            <input type="text" placeholder="Phone No." />
-            <button class="btn form__btn">Book Appointment</button>
+            <h4>Verificação de identidade</h4>
+            <input type="text" placeholder="Numero do CPF" />
+            <input type="text" placeholder="Nome Completo" />
+            <input type="text" placeholder="Idade" />
+            <input type="text" placeholder="Telefone" />
+            <button class="btn form__btn">Concluir Verificação</button>
           </form>
         </div>
       </div>
@@ -50,165 +47,96 @@
     <section class="section__container service__container" id="service">
       <div class="service__header">
         <div class="service__header__content">
-          <h2 class="section__header">Our Special service</h2>
+          <h2 class="section__header">Dicas de primeiros socorros</h2>
           <p>
-            Beyond simply providing medical care, our commitment lies in
-            delivering unparalleled service tailored to your unique needs.
+            O SAMU (Serviço de Atendimento Móvel de Urgência) recomenda algumas práticas básicas de primeiros socorros que qualquer pessoa pode seguir em caso de emergência. Aqui estão algumas dicas:
           </p>
         </div>
-        <button class="service__btn">Ask A Service</button>
+        <button class="service__btn">Ler Mais</button>
       </div>
       <div class="service__grid">
         <div class="service__card">
-          <span><i class="ri-microscope-line"></i></span>
-          <h4>Laboratory Test</h4>
-          <p>
-            Accurate Diagnostics, Swift Results: Experience top-notch Laboratory
-            Testing at our facility.
-          </p>
-          <a href="#">Learn More</a>
+          <span><i class="ri-fire-line"></i></span>
+          <h4>Queimaduras</h4>
+          
+           <p>Queimadura de Primeiro Grau: Resfrie a área com água corrente por 10-20 minutos. Evite gelo, pois pode agravar a lesão.</p>
+           <p>Queimadura Grave: Não retire roupas grudadas na pele e cubra a área com um pano limpo até o atendimento.</p>
+          
+          <a href="#">Ler Mais</a>
         </div>
         <div class="service__card">
-          <span><i class="ri-mental-health-line"></i></span>
-          <h4>Health Check</h4>
+          <span><i class="ri-service-line"></i></span>
+          <h4>Parada Cardiorrespiratória</h4>
           <p>
-            Our thorough assessments and expert evaluations help you stay
-            proactive about your health.
+            Verifique se a pessoa responde e se está respirando. Caso contrário, inicie a RCP. A sequência é 30 compressões no peito seguidas de 2 insuflações (ventilação boca a boca).
           </p>
-          <a href="#">Learn More</a>
+          <a href="#">Ler Mais</a>
         </div>
         <div class="service__card">
-          <span><i class="ri-hospital-line"></i></span>
-          <h4>General Dentistry</h4>
+          <span><i class="ri-lungs-line"></i></span>
+          <h4>Emergências Respiratórias</h4>
+          
+           <p> Engasgo: Se alguém estiver engasgado, incentive a pessoa a tossir. Se isso não funcionar e a pessoa estiver consciente, realize a Manobra de Heimlich.</p>
+           <p> Parada Respiratória: Se a pessoa não estiver respirando, inicie a RCP (ressuscitação cardiopulmonar). Posicione suas mãos sobre o peito da vítima e faça compressões fortes e rápidas.</p>
+          
+          <a href="#">Ler Mais</a>
+        </div>
+        <div class="service__card">
+          <span><i class="ri-psychotherapy-line"></i></span>
+          <h4>Crise Convulsiva</h4>
           <p>
-            Experience comprehensive oral care with Dentistry. Trust us to keep
-            your smile healthy and bright.
+            Deite a pessoa de lado em uma superfície segura e retire objetos ao redor. Não tente conter os movimentos nem coloque nada na boca da pessoa.
           </p>
-          <a href="#">Learn More</a>
+          <a href="#">Ler Mais</a>
         </div>
       </div>
     </section>
     <section class="section__container about__container" id="about">
       <div class="about__content">
-        <h2 class="section__header">About Us</h2>
+        <h2 class="section__header">Quem somos</h2>
         <p>
-          Welcome to our healthcare website, your one-stop destination for
-          reliable and comprehensive health care information. We are committed
-          to promoting wellness and providing valuable resources to empower you
-          on your health journey.
+          Bem-vindo ao nosso site de atendimento da samu, seu atendimento único e rapido para
+          seus cuidados de saúde. Estamos comprometidos
+          para promover o bem-estar e fornecer recursos valiosos para capacitá-lo
+          em sua jornada de saúde.
         </p>
         <p>
-          Explore our extensive collection of expertly written articles and
-          guides covering a wide range of health topics. From understanding
-          common medical conditions to tips for maintaining a healthy lifestyle,
-          our content is designed to educate, inspire, and support you in making
-          informed choices for your health.
-        </p>
-        <p>
-          Discover practical health tips and lifestyle advice to optimize your
-          physical and mental well-being. We believe that small changes can lead
-          to significant improvements in your quality of life, and we're here to
-          guide you on your path to a healthier and happier you.
-        </p>
+          Explore nossa extensa coleção de artigos escritos por especialistas e
+          Guias que cobrem uma ampla gama de tópicos de primeiros socorros. Da compreensão
+          condições de primeiros socorros comuns a dicas para ajudar a pessoa enquanto a samu chega,
+          Nosso conteúdo é projetado para educar, informar e ter o atendimento mais rapido para você.
       </div>
       <div class="about__image">
-        <img src="assets/about.jpg" alt="about" />
+        <img src="assets/homemsamu.jpg" alt="" />
       </div>
     </section>
 
     <section class="section__container why__container" id="blog">
       <div class="why__image">
-        <img src="assets/choose-us.jpg" alt="why choose us" />
+        <img src="assets/gruposamu.jpeg" alt="" />
       </div>
       <div class="why__content">
-        <h2 class="section__header">Why Choose Us</h2>
+        <h2 class="section__header">Porque escolher-nos</h2>
         <p>
-          With a steadfast commitment to your well-being, our team of highly
-          trained healthcare professionals ensures that you receive nothing
-          short of exceptional patient experiences.
+          Com um compromisso inabalável com o seu bem-estar, nossa equipe de
+          profissionais de saúde treinados garantem que você receba
+          experiências excepcionais para você.
         </p>
         <div class="why__grid">
-          <span><i class="ri-hand-heart-line"></i></span>
+          <span><i class="ri-phone-line"></i></span>
           <div>
-            <h4>Intensive Care</h4>
+            <h4>Suporte Chat 24h</h4>
             <p>
-              Our Intensive Care Unit is equipped with advanced technology and
-              staffed by team of professionals
+              O suporte 24 horas de atendimento é um dos grandes pilares do sistema de emergências e uma verdadeira tranquilidade para a população. Saber que, em qualquer momento do dia ou da noite, há uma equipe preparada para responder a uma emergência é uma segurança incalculável.
             </p>
           </div>
-          <span><i class="ri-truck-line"></i></span>
+          <span><i class="ri-car-washing-line"></i></span>
           <div>
-            <h4>Free Ambulance Car</h4>
+            <h4>Mais de 50 Ambulâncias ativas</h4>
             <p>
-              A compassionate initiative to prioritize your health and
-              well-being without any financial burden.
+              O serviço de ambulâncias é um verdadeiro salvador de vidas, essencial para garantir atendimento rápido e eficiente em momentos críticos. Quando uma emergência acontece, seja um acidente, uma crise de saúde súbita ou uma complicação grave, as ambulâncias chegam como uma resposta ágil, trazendo alívio e esperança.
             </p>
           </div>
-          <span><i class="ri-hospital-line"></i></span>
-          <div>
-            <h4>Medical and Surgical</h4>
-            <p>
-              Our Medical and Surgical services offer advanced healthcare
-              solutions to address medical needs.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section__container doctors__container" id="pages">
-      <div class="doctors__header">
-        <div class="doctors__header__content">
-          <h2 class="section__header">Our Special Doctors</h2>
-          <p>
-            We take pride in our exceptional team of doctors, each a specialist
-            in their respective fields.
-          </p>
-        </div>
-        <div class="doctors__nav">
-          <span><i class="ri-arrow-left-line"></i></span>
-          <span><i class="ri-arrow-right-line"></i></span>
-        </div>
-      </div>
-      <div class="doctors__grid">
-        <div class="doctors__card">
-          <div class="doctors__card__image">
-            <img src="assets/doctor-1.jpg" alt="doctor" />
-            <div class="doctors__socials">
-              <span><i class="ri-instagram-line"></i></span>
-              <span><i class="ri-facebook-fill"></i></span>
-              <span><i class="ri-heart-fill"></i></span>
-              <span><i class="ri-twitter-fill"></i></span>
-            </div>
-          </div>
-          <h4>Dr. Emily Smith</h4>
-          <p>Cardiologist</p>
-        </div>
-        <div class="doctors__card">
-          <div class="doctors__card__image">
-            <img src="assets/doctor-2.jpg" alt="doctor" />
-            <div class="doctors__socials">
-              <span><i class="ri-instagram-line"></i></span>
-              <span><i class="ri-facebook-fill"></i></span>
-              <span><i class="ri-heart-fill"></i></span>
-              <span><i class="ri-twitter-fill"></i></span>
-            </div>
-          </div>
-          <h4>Dr. James Anderson</h4>
-          <p>Neurosurgeon</p>
-        </div>
-        <div class="doctors__card">
-          <div class="doctors__card__image">
-            <img src="assets/doctor-3.jpg" alt="doctor" />
-            <div class="doctors__socials">
-              <span><i class="ri-instagram-line"></i></span>
-              <span><i class="ri-facebook-fill"></i></span>
-              <span><i class="ri-heart-fill"></i></span>
-              <span><i class="ri-twitter-fill"></i></span>
-            </div>
-          </div>
-          <h4>Dr. Michael Lee</h4>
-          <p>Dermatologist</p>
         </div>
       </div>
     </section>
@@ -218,13 +146,13 @@
         <div class="footer__col">
           <h3>Health<span>Care</span></h3>
           <p>
-            We are honored to be a part of your healthcare journey and committed
-            to delivering compassionate, personalized, and top-notch care every
-            step of the way.
+            Estamos honrados em fazer parte de sua jornada de saúde e comprometidos
+            para fornecer cuidados compassivos, personalizados e de alto nível a cada
+            passo do caminho.
           </p>
           <p>
-            Trust us with your health, and let us work together to achieve the
-            best possible outcomes for you and your loved ones.
+            Confie-nos com sua saúde e deixe-nos trabalhar juntos para alcançar o
+            melhores resultados possíveis para você e seus entes queridos.
           </p>
         </div>
         <div class="footer__col">
@@ -236,25 +164,19 @@
           <p>Terms & Conditions</p>
         </div>
         <div class="footer__col">
-          <h4>Services</h4>
-          <p>Search Terms</p>
-          <p>Advance Search</p>
-          <p>Privacy Policy</p>
-          <p>Suppliers</p>
-          <p>Our Stores</p>
+          <h4>Serviços</h4>
+          <p>Termos de pesquisa</p>
+          <p>Pesquisa avançada</p>
+          <p>Política de privacidade</p>
         </div>
         <div class="footer__col">
-          <h4>Contact Us</h4>
-          <p>
-            <i class="ri-map-pin-2-fill"></i> 123, London Bridge Street, London
-          </p>
-          <p><i class="ri-mail-fill"></i> support@care.com</p>
-          <p><i class="ri-phone-fill"></i> (+012) 3456 789</p>
+          <h4>Contate-nos</h4>
+          <p><i class="ri-mail-fill"></i> samu192@gmail.com</p>
+          <p><i class="ri-phone-fill"></i> 192</p>
         </div>
       </div>
       <div class="footer__bar">
         <div class="footer__bar__content">
-          <p>Copyright © 2023 Web Design Mastery. All rights reserved.</p>
           <div class="footer__socials">
             <span><i class="ri-instagram-line"></i></span>
             <span><i class="ri-facebook-fill"></i></span>
