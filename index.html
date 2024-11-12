@@ -224,6 +224,7 @@
           </form>
           <div id="verificationResult"></div>
         </div>
+
       </div>
     </header>
   </body>
@@ -241,7 +242,7 @@
     <div class="chatbox__button">
         <button onclick="toggleChat()">Caixa De Mensagens</button>
     </div>
-</div>
+  </div>
 
 <script>
   function submitEmergency() {
@@ -302,18 +303,18 @@
     }
 
     function carregarSolicitacoesEmergencia() {
-        fetch('get_emergencias.php')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('emergencyRequests').innerHTML = data;
-            })
-            .catch(error => console.error('Erro ao carregar as solicitações de emergência:', error));
+      fetch('get_emergencias.php')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('emergencyRequests').innerHTML = data;
+        })
+        .catch(error => console.error('Erro ao carregar as solicitações de emergência:', error));
     }
 
-    function cancelarEmergencia() {
-        alert("Chamado de emergência cancelado.");
-        document.querySelector('.chatbox__support').style.display = 'none';
-    }
+        
+
+    
+
 </script>
   </div>
   
