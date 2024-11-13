@@ -100,6 +100,10 @@
     font-size: 14px;
 }
 
+.chatbox__button button:hover {
+    background-color: #45a049;
+}
+
 /* Animação de digitação */
 @keyframes blink {
     0%, 100% {

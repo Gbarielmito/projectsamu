@@ -46,6 +46,10 @@
   cursor: pointer;
 }
 
+.btn:hover {
+  background-color: #fca689;
+}
+
 .btnsoli {
   padding: 0.40rem 0.80rem;
   outline: none;
@@ -56,6 +60,10 @@
   background-color: #ec1010;
   border-radius: 7px;
   cursor: pointer;
+}
+
+.btnsoli:hover {
+  background-color: #fca689;
 }
 
 .popup {

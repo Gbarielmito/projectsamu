@@ -21,11 +21,16 @@ function toggleChat() {
 }
 
 function cancelarEmergencia() {
-    alert("Chamado de emergência cancelado.");
-    const chatboxSupport = document.querySelector('.chatbox__support');
-    if (chatboxSupport) {
-        chatboxSupport.style.display = 'none';
-    } else {
-        console.error("Elemento .chatbox__support não encontrado.");
+    // Sua lógica existente para cancelar a emergência
+
+    // Limpar o cache da database
+    if ('caches' in window) {
+        caches.keys().then(function(names) {
+            for (let name of names) {
+                caches.delete(name);
+            }
+        });
     }
+
+    console.log("Cache da database limpo.");
 }

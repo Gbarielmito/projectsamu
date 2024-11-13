@@ -42,6 +42,8 @@
              <a href="tel:192"><button onclick="openVerificationPopup()">Concluir chamado de emergência</button></a>
             </div>
 
+            
+
             <script src="./scripts/database.js"></script>
 
             <script src="./scripts/fecharpopambu.js"> /* função para fechar quando clicar em chamar a ambulancia */</script>
@@ -81,20 +83,6 @@
             </div>
           </form>
 
-          <div id="myModal" class="modal">
-            <div class="modal-content">
-              <span class="close">&times;</span>
-              <h2>Preencha seus dados</h2>
-              <form id="patientForm">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br><br>
-                <label for="name">Senha:</label>
-                <input type="password" id="senha" name="senha" required><br><br>
-                <button type="submit">Enviar</button>
-              </form>
-            </div>
-          </div>
-
           <script src="./scripts/formpop.js"></script>
           <script src="./scripts/validarcpf.js"></script>
           <div id="verificationResult"></div>
@@ -114,7 +102,7 @@
           </div>
       </div>
       <div class="chatbox__button">
-          <button onclick="toggleChat()">Caixa De Mensagens</button>
+          <button class="msg" onclick="toggleChat()">Caixa De Mensagens</button>
       </div>
   </div>
   
