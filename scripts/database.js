@@ -39,8 +39,54 @@ request.onsuccess = function(event) {
             console.log("Erro ao salvar os dados: ", event.target.error);
         };
     });
+
+    // Função para ler os dados do banco de dados
+    window.readData = function() {
+        let transaction = db.transaction(["emergencyInfo"], "readonly");
+        let objectStore = transaction.objectStore("emergencyInfo");
+
+        let request = objectStore.getAll();
+
+        request.onsuccess = function(event) {
+            const emergencyRequests = document.getElementById("emergencyRequests");
+            emergencyRequests.innerHTML = ''; // Limpar conteúdo anterior
+
+            if (event.target.result.length === 0) {
+                emergencyRequests.innerHTML = '<p>Nenhum dado encontrado.</p>';
+                return;
+            }
+
+            event.target.result.forEach(dado => {
+                console.log(dado); // Imprimir dados no console
+                const mensagem = document.createElement('div');
+                mensagem.className = 'mensagem';
+                mensagem.innerHTML = `
+                    <p><strong>Nome:</strong> ${dado.nome}</p>
+                    <p><strong>Ocorrência:</strong> ${dado.ocorrencia}</p>
+                    <p><strong>Local:</strong> ${dado.local}</p>
+                    <p><strong>Foto:</strong> ${dado.photo}</p>
+                `;
+                emergencyRequests.appendChild(mensagem);
+            });
+        };
+
+        request.onerror = function(event) {
+            console.log("Erro ao ler os dados: ", event.target.error);
+        };
+    };
 };
 
 request.onerror = function(event) {
     console.log("Erro ao abrir o banco de dados: ", event.target.error);
 };
+
+// Chamar a função readData quando a página é carregada
+document.addEventListener("DOMContentLoaded", function() {
+    readData();
+});
+
+function toggleChat() {
+    const chatbox = document.querySelector('.chatbox');
+    chatbox.classList.toggle('chatbox--active');
+    readData(); // Atualizar dados sempre que o chatbox é aberto
+}

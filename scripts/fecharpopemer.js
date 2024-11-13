@@ -20,3 +20,23 @@ function closeVerificationPopup() {
     document.getElementById("verificationPopup").style.display = "none";
     document.getElementById("overlayVerification").style.display = "none";
 }
+
+function closeVerificationPopup(event) {
+    if (event) {
+        event.preventDefault();
+    }
+    var verificationPopup = document.getElementById("verificationPopup");
+    var overlayVerification = document.getElementById("overlayVerification");
+
+    if (verificationPopup) {
+        verificationPopup.style.display = "none";
+    } else {
+        console.error("Element with ID 'verificationPopup' not found.");
+    }
+
+    if (overlayVerification) {
+        overlayVerification.style.display = "none";
+    } else {
+        console.error("Element with ID 'overlayVerification' not found.");
+    }
+}

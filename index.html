@@ -8,7 +8,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="./csschatbox/typing.css">
     <link rel="stylesheet" href="./csschatbox/chat.css">
     <link rel="stylesheet" href="./popveri.css">
     <title>Samu Conect</title>
@@ -73,8 +72,8 @@
                 <h3>Chamado de emergência enviado com sucesso</h3>
                 <p>Confirme que você concluiu a verificação dos dados.</p>
                 
-                <a href="https://www.reclameaqui.com.br/empresa/prefeitura-feira-de-santana/"><button onclick="submitFeedback()">Enviar Feedback</button></a>
-                <button onclick="closeVerificationPopup()">Fechar</button>
+                <button onclick="submitFeedback()">Enviar Feedback</button>
+                <button onclick="closeVerificationPopup(event)">Fechar</button>
 
               </div>
             </div>
@@ -86,21 +85,27 @@
   </body>
       
   <div class="chatbox">
-    <div class="chatbox__support">
-        <div class="chatbox__header">Solicitações de emergência</div>
-        <div class="chatbox__messages" id="emergencyRequests">
-
-        </div>
-        <div class="chatbox__footer">
-            <button class="btnsoli" onclick="cancelarEmergencia()">Cancelar emergência</button>
-        </div>
-    </div>
-    <div class="chatbox__button">
-        <button onclick="toggleChat()">Caixa De Mensagens</button>
-    </div>
+      <div class="chatbox__support">
+          <div class="chatbox__header">Solicitações de emergência</div>
+          <div class="chatbox__messages" id="emergencyRequests">
+              <!-- Dados serão inseridos aqui -->
+          </div>
+          <div class="chatbox__footer">
+              <button class="btnsoli" onclick="cancelarEmergencia()">Cancelar emergência</button>
+          </div>
+      </div>
+      <div class="chatbox__button">
+          <button onclick="toggleChat()">Caixa De Mensagens</button>
+      </div>
   </div>
+  
+  
+    <script src="./scripts/caixademsg.js"></script>
 
-  <script src="./scripts/caixademsg.js"></script>
+    <div class="chatbox__support" style="display: none;">
+        <div class="content"></div>
+    </div>
+
 
   
   
