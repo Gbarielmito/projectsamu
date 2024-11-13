@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="./csschatbox/chat.css">
     <link rel="stylesheet" href="./popveri.css">
+    <link rel="stylesheet" href="./popform.css">
     <title>Samu Conect</title>
   </head>
   <body>
     <header>
       <nav class="section__container nav__container">
-        <img src="/assets/samu.png" alt="" class="logosamu">
+        <img src="./assets/samu.png" alt="" class="logosamu">
         <ul class="nav__links">
           <li class="link"><a href="#home">Inicio</a></li>
           <li class="link"><a href="#about">Quem somos</a></li>
@@ -50,7 +51,7 @@
           
           <script src="./scripts/localizacao.js">// Função para obter a localização</script>
           
-        <script src="./scripts/validarcpf.js"></script>
+        
       </nav>
       
       <div class="section__container header__container" id="home">
@@ -65,7 +66,8 @@
             <input type="text" id="fullName" placeholder="Nome Completo" />
             <input type="text" id="age" placeholder="Idade" />
             <input type="text" id="phone" placeholder="Telefone" />
-            <button type="submit" class="btn form__btn">Concluir Verificação</button>
+            <button type="submit" class="btn form__btn" id="enviarBtn">Concluir Verificação</button>
+
             
             <div id="verificationPopup" class="popup-overlay">
               <div class="popup-content">
@@ -78,6 +80,23 @@
               </div>
             </div>
           </form>
+
+          <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Preencha seus dados</h2>
+              <form id="patientForm">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="name">Senha:</label>
+                <input type="password" id="senha" name="senha" required><br><br>
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+          </div>
+
+          <script src="./scripts/formpop.js"></script>
+          <script src="./scripts/validarcpf.js"></script>
           <div id="verificationResult"></div>
         </div>
       </div>

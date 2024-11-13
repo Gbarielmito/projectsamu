@@ -1,14 +1,14 @@
 function openPopup() {
     document.getElementById("popupForm").style.display = "block";
     document.getElementById("overlay").style.display = "block";
-  }
+}
 
-  function closePopup() {
+function closePopup() {
     document.getElementById("popupForm").style.display = "none";
     document.getElementById("overlay").style.display = "none";
-  }
+}
 
-  function validaCPF(cpf) {
+function validaCPF(cpf) {
     cpf = cpf.replace(/[^\d]+/g, '');
 
     if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -24,9 +24,9 @@ function openPopup() {
     resto = (soma * 10) % 11;
     if (resto === 10 || resto === 11) resto = 0;
     return resto === parseInt(cpf.charAt(10));
-  }
+}
 
-  function verificarFormulario(event) {
+function verificarFormulario(event) {
     event.preventDefault();  
     
     const cpf = document.getElementById('cpf').value;
@@ -34,19 +34,19 @@ function openPopup() {
     const age = document.getElementById('age').value;
     const phone = document.getElementById('phone').value;
 
-    
     if (!cpf || !fullName || !age || !phone) {
-      alert('Por favor, preencha todos os campos necessários.');
-      return;
+        alert('Por favor, preencha todos os campos necessários.');
+        return;
     }
 
     // Valida o CPF
     if (!validaCPF(cpf)) {
-      alert('CPF inválido!');
-      return;
+        alert('CPF inválido!');
+        return;
     }
 
-    
-  }
+    // Se tudo estiver correto, abre o popup
+    openPopup();
+}
 
-  document.getElementById('verificationForm').addEventListener('submit', verificarFormulario);
+document.getElementById('verificationForm').addEventListener('submit', verificarFormulario);
