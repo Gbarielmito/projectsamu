@@ -74,6 +74,23 @@ request.onsuccess = function(event) {
             console.log("Erro ao ler os dados: ", event.target.error);
         };
     };
+
+    // Função para limpar todos os dados do banco de dados
+    window.cancelarEmergencia = function() {
+        let transaction = db.transaction(["emergencyInfo"], "readwrite");
+        let objectStore = transaction.objectStore("emergencyInfo");
+
+        let clearRequest = objectStore.clear();
+
+        clearRequest.onsuccess = function(event) {
+            console.log("Todos os dados foram removidos com sucesso!");
+            readData(); // Atualizar a exibição dos dados
+        };
+
+        clearRequest.onerror = function(event) {
+            console.log("Erro ao remover os dados: ", event.target.error);
+        };
+    };
 };
 
 request.onerror = function(event) {

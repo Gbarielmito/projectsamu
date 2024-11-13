@@ -24,6 +24,12 @@
     font-size: 16px;
 }
 
+
+/* Estilo para parágrafos dentro da caixa de mensagens */
+.chatbox p {
+    font-family: 'Times New Roman', Times, serif;
+}
+
 .chatbox__messages {
     padding: 10px;
     height: 200px;
