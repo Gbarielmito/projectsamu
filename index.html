@@ -42,6 +42,15 @@
              <a href="tel:192"><button onclick="openVerificationPopup()">Concluir chamado de emergência</button></a>
             </div>
 
+            <script> /* função para fechar quando clicar em chamar a ambulancia */
+              function closePopupAfterClick() {
+                document.getElementById("popupForm").style.display = "none";
+                document.getElementById("overlay").style.display = "none";
+              }
+
+              document.querySelector("#popupForm button").addEventListener("click", closePopupAfterClick);
+            </script>
+
             <script>
                function openPopup() {
                 document.getElementById("popupForm").style.display = "block";
@@ -99,41 +108,7 @@
               }
             }
           
-            // Função para enviar o formulário de emergência
-            function submitPopupForm() {
-              const nome = document.getElementById('nome').value;
-              const ocorrencia = document.getElementById('ocorrencia').value;
-              const local = document.getElementById('local').value;
-          
-              if (!nome || !ocorrencia || !local) {
-                alert('Por favor, preencha todos os campos.');
-                return;
-              }
-          
-              // Criar o FormData para enviar os dados
-              const formData = new FormData();
-              formData.append('nome', nome);
-              formData.append('ocorrencia', ocorrencia);
-              formData.append('local', local);
-              formData.append('photo', document.getElementById('photo').files[0]);
-              formData.append('video', document.getElementById('video').files[0]);
-          
-              // Enviar via AJAX para o servidor
-              fetch('salvar_emergencia.php', {
-                method: 'POST',
-                body: formData
-              })
-              .then(response => response.text())
-              .then(data => {
-                alert('Chamado aberto com sucesso!');
-                closePopup();
-                carregarSolicitacoesEmergencia();  // Atualiza a caixa de mensagens com a nova solicitação
-              })
-              .catch(error => {
-                console.error('Erro ao abrir o chamado:', error);
-                alert('Ocorreu um erro ao abrir o chamado. Tente novamente.');
-              });
-            }
+            
           
             // Chama a função para obter a localização ao carregar a página
             window.onload = function() {
@@ -217,8 +192,9 @@
                 <h3>Chamado de emergência enviado com sucesso</h3>
                 <p>Confirme que você concluiu a verificação dos dados.</p>
                 
-                <button onclick="submitFeedback()">Enviar Feedback</button>
+                <a href="https://www.reclameaqui.com.br/empresa/prefeitura-feira-de-santana/"><button onclick="submitFeedback()">Enviar Feedback</button></a>
                 <button onclick="closeVerificationPopup()">Fechar</button>
+
               </div>
             </div>
           </form>
