@@ -42,134 +42,16 @@
              <a href="tel:192"><button onclick="openVerificationPopup()">Concluir chamado de emergência</button></a>
             </div>
 
-            <script> /* função para fechar quando clicar em chamar a ambulancia */
-              function closePopupAfterClick() {
-                document.getElementById("popupForm").style.display = "none";
-                document.getElementById("overlay").style.display = "none";
-              }
+            <script src="./scripts/database.js"></script>
 
-              document.querySelector("#popupForm button").addEventListener("click", closePopupAfterClick);
-            </script>
+            <script src="./scripts/fecharpopambu.js"> /* função para fechar quando clicar em chamar a ambulancia */</script>
 
-            <script>
-               function openPopup() {
-                document.getElementById("popupForm").style.display = "block";
-                document.getElementById("overlay").style.display = "block";
-            }
-
-            // Função para fechar o pop-up de Emergência
-            function closePopup() {
-                document.getElementById("popupForm").style.display = "none";
-                document.getElementById("overlay").style.display = "none";
-            }
-
-            // Função para abrir o pop-up de Concluir Verificação
-            function openVerificationPopup() {
-                document.getElementById("verificationPopup").style.display = "block";
-                document.getElementById("overlayVerification").style.display = "block";
-            }
-
-            // Função para fechar o pop-up de Concluir Verificação
-            function closeVerificationPopup() {
-                document.getElementById("verificationPopup").style.display = "none";
-                document.getElementById("overlayVerification").style.display = "none";
-            }
-            </script>
+            <script src="./scripts/fecharpopemer.js">// Função para fechar o pop-up de Emergência</script>
           </div>
           
-          <script>
-            // Função para obter a localização
-            function getLocation() {
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                  function(position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
+          <script src="./scripts/localizacao.js">// Função para obter a localização</script>
           
-                    // Usar uma API para converter coordenadas em um endereço legível
-                    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
-                      .then(response => response.json())
-                      .then(data => {
-                        const location = data.display_name || 'Localização desconhecida';
-                        document.getElementById('local').value = location; // Preenche o campo "local" com o endereço
-                      })
-                      .catch(error => {
-                        console.error('Erro ao obter o local:', error);
-                        document.getElementById('local').value = 'Erro ao obter localização';
-                      });
-                  },
-                  function(error) {
-                    console.error('Erro ao obter geolocalização:', error);
-                    document.getElementById('local').value = 'Localização não disponível';
-                  }
-                );
-              } else {
-                alert('A geolocalização não é suportada neste navegador.');
-              }
-            }
-          
-            
-          
-            // Chama a função para obter a localização ao carregar a página
-            window.onload = function() {
-              getLocation();
-            };
-        </script>
-          
-        <script>
-          function openPopup() {
-            document.getElementById("popupForm").style.display = "block";
-            document.getElementById("overlay").style.display = "block";
-          }
-  
-          function closePopup() {
-            document.getElementById("popupForm").style.display = "none";
-            document.getElementById("overlay").style.display = "none";
-          }
-  
-          function validaCPF(cpf) {
-            cpf = cpf.replace(/[^\d]+/g, '');
-  
-            if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-  
-            let soma = 0;
-            for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
-            let resto = (soma * 10) % 11;
-            if (resto === 10 || resto === 11) resto = 0;
-            if (resto !== parseInt(cpf.charAt(9))) return false;
-  
-            soma = 0;
-            for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
-            resto = (soma * 10) % 11;
-            if (resto === 10 || resto === 11) resto = 0;
-            return resto === parseInt(cpf.charAt(10));
-          }
-  
-          function verificarFormulario(event) {
-            event.preventDefault();  
-            
-            const cpf = document.getElementById('cpf').value;
-            const fullName = document.getElementById('fullName').value;
-            const age = document.getElementById('age').value;
-            const phone = document.getElementById('phone').value;
-  
-            
-            if (!cpf || !fullName || !age || !phone) {
-              alert('Por favor, preencha todos os campos necessários.');
-              return;
-            }
-  
-            // Valida o CPF
-            if (!validaCPF(cpf)) {
-              alert('CPF inválido!');
-              return;
-            }
-  
-            
-          }
-  
-          document.getElementById('verificationForm').addEventListener('submit', verificarFormulario);
-        </script>
+        <script src="./scripts/validarcpf.js"></script>
       </nav>
       
       <div class="section__container header__container" id="home">
@@ -186,7 +68,6 @@
             <input type="text" id="phone" placeholder="Telefone" />
             <button type="submit" class="btn form__btn">Concluir Verificação</button>
             
-            <!-- Pop-up de Concluir Verificação -->
             <div id="verificationPopup" class="popup-overlay">
               <div class="popup-content">
                 <h3>Chamado de emergência enviado com sucesso</h3>
@@ -217,91 +98,16 @@
     <div class="chatbox__button">
         <button onclick="toggleChat()">Caixa De Mensagens</button>
     </div>
-</div>
-
-<script>
-  function submitEmergency() {
-    const nome = document.getElementById('nome').value;
-    const ocorrencia = document.getElementById('ocorrencia').value;
-    const local = document.getElementById('local').value;
-  
-    if (!nome || !ocorrencia || !local) {
-      alert('Por favor, preencha todos os campos.');
-      return;
-    }
-  
-    const formData = new FormData();
-    formData.append('nome', nome);
-    formData.append('ocorrencia', ocorrencia);
-    formData.append('local', local);
-  
-    fetch('salvar_emergencia.php', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-      alert(data);
-      closePopup();
-      carregarSolicitacoesEmergencia(); // Atualiza a caixa de mensagens
-    })
-    .catch(error => console.error('Erro ao salvar a emergência:', error));
-  }
-  
-  function carregarSolicitacoesEmergencia() {
-    fetch('get_emergencias.php')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('emergencyRequests').innerHTML = data;
-      })
-      .catch(error => console.error('Erro ao carregar as solicitações de emergência:', error));
-  }
-  
-  function toggleChat() {
-    const chatboxSupport = document.querySelector('.chatbox__support');
-    chatboxSupport.style.display = chatboxSupport.style.display === 'none' ? 'flex' : 'none';
-    if (chatboxSupport.style.display === 'flex') {
-      carregarSolicitacoesEmergencia();
-    }
-  }
-  </script>
-
-<script>
-    function toggleChat() {
-        const chatboxSupport = document.querySelector('.chatbox__support');
-        chatboxSupport.style.display = chatboxSupport.style.display === 'none' || chatboxSupport.style.display === '' ? 'flex' : 'none';
-        
-        
-        if (chatboxSupport.style.display === 'flex') {
-            carregarSolicitacoesEmergencia();
-        }
-    }
-
-    function carregarSolicitacoesEmergencia() {
-        fetch('get_emergencias.php')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('emergencyRequests').innerHTML = data;
-            })
-            .catch(error => console.error('Erro ao carregar as solicitações de emergência:', error));
-    }
-
-    function cancelarEmergencia() {
-        alert("Chamado de emergência cancelado.");
-        document.querySelector('.chatbox__support').style.display = 'none';
-    }
-</script>
   </div>
+
+  <script src="./scripts/caixademsg.js"></script>
+
+  
   
 
-  <script>
-    function toggleChat() {
-        const chatboxSupport = document.querySelector('.chatbox__support');
-        chatboxSupport.style.display = chatboxSupport.style.display === 'none' || chatboxSupport.style.display === '' ? 'flex' : 'none';
-    }
-  </script>
+  
 
-    </header>
+  
 
     <section class="section__container service__container" id="service">
       <div class="service__header">
